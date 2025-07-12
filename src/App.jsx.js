@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Home as HomeIcon, Info, Book, UserPlus, Image, Mail, Menu, X, Download, Monitor, Users, Award, Briefcase, Phone, MessageSquare } from 'lucide-react'; // Added Phone and MessageSquare icons
+import { Home as HomeIcon, Info, Book, UserPlus, Image, Mail, Menu, X, Download, Monitor, Users, Award, Briefcase, Phone, MessageSquare, MapPin, Headset } from 'lucide-react'; // Added Headset icon explicitly here as it was used but not imported in the previous selection
+
+// Image and PDF Naming Conventions for your /public/images folder
+// Slideshow Images: slideshow1.jpg, slideshow2.jpg, slideshow3.jpg
+// Staff Photos: staff_gideon_lagat.jpg, staff_fredrrick_olang.jpg, staff_sharon_kiptoo.jpg
+// Co-curricular Images: cocurricular1.jpg, cocurricular2.jpg, cocurricular3.jpg, cocurricular4.jpg
+// Alumni Photo: alumni_ruth_jebet_kiplagat.jpg
+// Fee Structure PDF: pioneer_elite_fee_structure.pdf
+
+// Background Images (will be applied as inline styles with specific URLs)
+const HOME_BG_IMAGE = 'https://www.pexels.com/photo/pile-of-books-433333/';
+const ACADEMICS_BG_IMAGE = 'https://www.pexels.com/photo/photography-of-people-graduating-1205651/';
+const CONTACT_BG_IMAGE = 'https://www.pexels.com/photo/clear-light-bulb-placed-on-chalkboard-355952/';
+
 
 // Main App Component
 const App = () => {
   const [activePage, setActivePage] = useState('home');
   const [isNavOpen, setIsNavOpen] = useState(false);
 
+  const handleNavClick = (page) => {
+    setActivePage(page);
+    setIsNavOpen(false); // Close nav on item click
+    window.scrollTo(0, 0); // Scroll to top of the page
+  };
+
   const renderPage = () => {
     switch (activePage) {
       case 'home':
-        return <HomePage />;
+        return <HomePage handleNavClick={handleNavClick} />;
       case 'about':
         return <AboutPage />;
       case 'academics':
@@ -18,20 +37,20 @@ const App = () => {
         return <AdmissionsPage />;
       case 'gallery':
         return <GalleryEventsPage />;
-      case 'staff': // New page
+      case 'staff':
         return <StaffPage />;
-      case 'student-life': // New page
+      case 'student-life':
         return <StudentLifePage />;
       case 'contact':
         return <ContactPage />;
       default:
-        return <HomePage />;
+        return <HomePage handleNavClick={handleNavClick} />;
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 font-inter">
-      <Header setActivePage={setActivePage} isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+      <Header setActivePage={handleNavClick} isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
       <main className="container mx-auto p-4 sm:p-6 lg:p-8">
         {renderPage()}
       </main>
@@ -48,22 +67,17 @@ const Header = ({ setActivePage, isNavOpen, setIsNavOpen }) => {
     { name: 'Academics', icon: Book, page: 'academics' },
     { name: 'Admissions', icon: UserPlus, page: 'admissions' },
     { name: 'Gallery/Events', icon: Image, page: 'gallery' },
-    { name: 'Staff', icon: Users, page: 'staff' }, // New nav item
-    { name: 'Student Life', icon: Award, page: 'student-life' }, // New nav item
+    { name: 'Staff', icon: Users, page: 'staff' },
+    { name: 'Student Life', icon: Award, page: 'student-life' },
     { name: 'Contact', icon: Mail, page: 'contact' },
   ];
-
-  const handleNavClick = (page) => {
-    setActivePage(page);
-    setIsNavOpen(false); // Close nav on item click
-  };
 
   return (
     <header className="bg-blue-950 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between p-4 flex-wrap">
         <div className="flex items-center space-x-3">
           <img
-            src="https://digiskool.co.ke/pioneer-elite/upload/pioneer_logo.jpeg"
+            src="https://digiskool.co.ke/pioneer-elite/upload/pioneer_logo.jpeg" // Reverted to original link
             alt="Pioneer Elite Academy Logo"
             className="rounded-full h-10 w-10 object-cover"
             onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/ffffff/000000?text=PEA"; }}
@@ -83,7 +97,7 @@ const Header = ({ setActivePage, isNavOpen, setIsNavOpen }) => {
           {navItems.map((item) => (
             <button
               key={item.page}
-              onClick={() => handleNavClick(item.page)}
+              onClick={() => setActivePage(item.page)}
               className="flex items-center space-x-2 py-2 px-3 rounded-md hover:bg-blue-900 transition-colors duration-200"
             >
               <item.icon size={20} />
@@ -100,7 +114,7 @@ const Header = ({ setActivePage, isNavOpen, setIsNavOpen }) => {
             {navItems.map((item) => (
               <button
                 key={item.page}
-                onClick={() => handleNavClick(item.page)}
+                onClick={() => setActivePage(item.page)}
                 className="flex items-center space-x-3 w-full justify-center py-3 px-4 rounded-md hover:bg-blue-800 transition-colors duration-200"
               >
                 <item.icon size={22} />
@@ -121,19 +135,18 @@ const Footer = () => {
       <div className="container mx-auto">
         <p>&copy; {new Date().getFullYear()} PIONEER ELITE ACADEMY. All rights reserved.</p>
         <p className="mt-2 text-sm">Designed with <span className="text-red-500">&hearts;</span> for education.</p>
-        <p className="mt-2 text-sm">Designed by Rimo Software Company.</p>
       </div>
     </footer>
   );
 };
 
 // Home Page Component
-const HomePage = () => {
+const HomePage = ({ handleNavClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    "https://placehold.co/1200x400/a3d9ff/000000?text=School+Life+1",
-    "https://placehold.co/1200x400/b3e0ff/000000?text=School+Life+2",
-    "https://placehold.co/1200x400/c3e7ff/000000?text=School+Life+3",
+    "/images/slideshow1.jpg", // Updated path
+    "/images/slideshow2.jpg", // Updated path
+    "/images/slideshow3.jpg", // Updated path
   ];
 
   useEffect(() => {
@@ -144,100 +157,124 @@ const HomePage = () => {
   }, [images.length]);
 
   return (
-    <section className="bg-white p-8 rounded-lg shadow-md mb-8">
-      <h2 className="text-4xl font-extrabold text-red-800 mb-6 text-center">Welcome to PIONEER ELITE ACADEMY!</h2>
-      <p className="text-lg text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
-        PIONEER ELITE ACADEMY is a leading primary and junior secondary school dedicated to fostering a nurturing and stimulating environment where every student can achieve their full potential. We believe in holistic education that balances academic excellence with character development and extracurricular engagement. Join our vibrant community and embark on a journey of discovery, growth, and success!
-      </p>
-
-      {/* Image Slideshow */}
-      <div className="relative w-full overflow-hidden rounded-lg shadow-lg mb-10 h-64 sm:h-80 md:h-96">
-        {images.map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt={`School Life ${index + 1}`}
-            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
-            onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/1200x400/cccccc/333333?text=Image+Error"; }}
-          />
-        ))}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-white scale-150' : 'bg-gray-400'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            ></button>
-          ))}
-        </div>
-      </div>
-
-      {/* Quick Links / Site Summary */}
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-yellow-50 p-6 rounded-lg shadow-sm text-center transform hover:scale-105 transition-transform duration-300">
-          <h3 className="text-2xl font-semibold text-red-800 mb-3">Admissions</h3>
-          <p className="text-gray-600">Discover how to join our school family.</p>
-          <a href="#" className="mt-4 inline-block bg-red-700 text-white px-5 py-2 rounded-full hover:bg-red-800 transition-colors">Learn More</a>
-        </div>
-        <div className="bg-green-50 p-6 rounded-lg shadow-sm text-center transform hover:scale-105 transition-transform duration-300">
-          <h3 className="2xl font-semibold text-green-800 mb-3">Calendar</h3>
-          <p className="text-gray-600">Stay updated with our academic calendar.</p>
-          <a href="#" className="mt-4 inline-block bg-green-700 text-white px-5 py-2 rounded-full hover:bg-green-800 transition-colors">View Calendar</a>
-        </div>
-        <div className="bg-red-50 p-6 rounded-lg shadow-sm text-center transform hover:scale-105 transition-transform duration-300">
-          <h3 className="text-2xl font-semibold text-yellow-700 mb-3">Contact Us</h3>
-          <p className="text-gray-600">Get in touch with our friendly staff.</p>
-          <a href="#" className="mt-4 inline-block bg-yellow-600 text-white px-5 py-2 rounded-full hover:bg-yellow-700 transition-colors">Contact Now</a>
-        </div>
-      </div>
-
-      {/* Online System Section */}
-      <div className="mt-10 bg-blue-900 text-white p-8 rounded-lg shadow-lg text-center">
-        <h3 className="text-3xl font-bold mb-4 flex items-center justify-center space-x-3">
-          <Monitor size={32} className="text-yellow-400" />
-          <span>Our Online School Management System</span>
-        </h3>
-        <p className="text-lg leading-relaxed max-w-3xl mx-auto mb-6">
-          Pioneer Elite Academy utilizes a comprehensive online system to manage all school activities, including registration, fees, examinations, accommodations, subject classes, and departments. Parents and students have dedicated portals to view fee balances, check exam results, and receive termly notifications.
+    <section
+      className="p-8 rounded-lg shadow-md mb-8 relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${HOME_BG_IMAGE})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="absolute inset-0 bg-white bg-opacity-80 rounded-lg"></div> {/* Overlay for readability */}
+      <div className="relative z-10"> {/* Content wrapper */}
+        <h2 className="text-4xl font-extrabold text-red-800 mb-6 text-center">Welcome to PIONEER ELITE ACADEMY!</h2>
+        <p className="text-lg text-gray-700 leading-relaxed text-center max-w-3xl mx-auto mb-8">
+          PIONEER ELITE ACADEMY is a leading primary and junior secondary school dedicated to fostering a nurturing and stimulating environment where every student can achieve their full potential. We believe in holistic education that balances academic excellence with character development and extracurricular engagement. Join our vibrant community and embark on a journey of discovery, growth, and success!
         </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <a
-            href="https://digiskool.co.ke/pioneer-elite/index.php"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-yellow-600 text-blue-950 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-colors text-lg shadow-md"
-          >
-            Access Login Portal
-          </a>
-          {/* Updated Request Login Credentials section */}
-          <a
-            href="https://wa.me/254705926417?text=Hi%2C%20I%20need%20help%20with%20my%20login%20credentials%20for%20the%20Online%20School%20Management%20System."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-green-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-800 transition-colors text-lg shadow-md flex items-center space-x-2"
-          >
-            <MessageSquare size={20} />
-            <span>WhatsApp Help Center</span>
-          </a>
-          <a
-            href="tel:+254705926417"
-            className="inline-block bg-red-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-red-800 transition-colors text-lg shadow-md flex items-center space-x-2"
-          >
-            <Phone size={20} />
-            <span>Call Help Center</span>
-          </a>
+
+        {/* Image Slideshow */}
+        <div className="relative w-full overflow-hidden rounded-lg shadow-lg mb-10 h-64 sm:h-80 md:h-96">
+          {images.map((src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt={`School Life ${index + 1}`}
+              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+              onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/1200x400/cccccc/333333?text=Image+Error"; }}
+            />
+          ))}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2 w-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide ? 'bg-white scale-150' : 'bg-gray-400'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              ></button>
+            ))}
+          </div>
+        </div>
+
+        {/* Quick Links / Site Summary */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-yellow-50 p-6 rounded-lg shadow-sm text-center transform hover:scale-105 transition-transform duration-300">
+            <h3 className="text-2xl font-semibold text-red-800 mb-3">Admissions</h3>
+            <p className="text-gray-600">Discover how to join our school family.</p>
+            <button onClick={() => handleNavClick('admissions')} className="mt-4 inline-block bg-red-700 text-white px-5 py-2 rounded-full hover:bg-red-800 transition-colors">Learn More</button>
+          </div>
+          <div className="bg-green-50 p-6 rounded-lg shadow-sm text-center transform hover:scale-105 transition-transform duration-300">
+            <h3 className="text-2xl font-semibold text-green-800 mb-3">Calendar</h3>
+            <p className="text-gray-600">Stay updated with our academic calendar.</p>
+            <button onClick={() => handleNavClick('gallery')} className="mt-4 inline-block bg-green-700 text-white px-5 py-2 rounded-full hover:bg-green-800 transition-colors">View Calendar</button>
+          </div>
+          <div className="bg-red-50 p-6 rounded-lg shadow-sm text-center transform hover:scale-105 transition-transform duration-300">
+            <h3 className="text-2xl font-semibold text-yellow-700 mb-3">Contact Us</h3>
+            <p className="text-gray-600">Get in touch with our friendly staff.</p>
+            <button onClick={() => handleNavClick('contact')} className="mt-4 inline-block bg-yellow-600 text-white px-5 py-2 rounded-full hover:bg-yellow-700 transition-colors">Contact Now</button>
+          </div>
+        </div>
+
+        {/* Secondary Navigation Links for Mobile/Home Page */}
+        <div className="mt-10 p-6 bg-blue-50 rounded-lg shadow-md">
+          <h3 className="text-2xl font-semibold text-blue-900 mb-4 text-center">Explore Our School</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <button onClick={() => handleNavClick('about')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">About Us</button>
+            <button onClick={() => handleNavClick('academics')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">Academics</button>
+            <button onClick={() => handleNavClick('staff')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">Our Staff</button>
+            <button onClick={() => handleNavClick('student-life')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">Student Life</button>
+            <button onClick={() => handleNavClick('gallery')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">Gallery & Events</button>
+          </div>
+        </div>
+
+        {/* Online System Section */}
+        <div className="mt-10 bg-blue-900 text-white p-8 rounded-lg shadow-lg text-center">
+          <h3 className="text-3xl font-bold mb-4 flex items-center justify-center space-x-3">
+            <Monitor size={32} className="text-yellow-400" />
+            <span>Our Online School Management System</span>
+          </h3>
+          <p className="text-lg leading-relaxed max-w-3xl mx-auto mb-6">
+            Pioneer Elite Academy utilizes a comprehensive online system to manage all school activities, including registration, fees, examinations, accommodations, subject classes, and departments. Parents and students have dedicated portals to view fee balances, check exam results, and receive termly notifications.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <a
+              href="https://digiskool.co.ke/pioneer-elite/index.php"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-yellow-600 text-blue-950 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-colors text-lg shadow-md"
+            >
+              Access Login Portal
+            </a>
+            {/* Request Login Credentials section with WhatsApp and Call options */}
+            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+              <a
+                href="https://wa.me/254705926417?text=Hi%2C%20I%20need%20help%20with%20my%20login%20credentials%20for%20the%20Online%20School%20Management%20System."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-green-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-800 transition-colors text-lg shadow-md flex items-center justify-center space-x-2"
+              >
+                <MessageSquare size={20} />
+                <span>WhatsApp Help</span>
+              </a>
+              <a
+                href="tel:+254705926417"
+                className="inline-block bg-red-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-800 transition-colors text-lg shadow-md flex items-center space-x-2"
+              >
+                <Phone size={20} />
+                <span>Call Help</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-// About Page Component (No changes from previous version)
+// About Page Component
 const AboutPage = () => {
   return (
     <section className="bg-white p-8 rounded-lg shadow-md mb-8">
@@ -249,7 +286,7 @@ const AboutPage = () => {
           <strong>Vision:</strong> To be a leading educational institution that inspires lifelong learning, critical thinking, and responsible global citizenship.
         </p>
         <p className="text-gray-700 leading-relaxed mt-2">
-          <strong>Mission:</strong> To provide a comprehensive and challenging curriculum, foster a supportive community, and empower students to become compassionate, innovative, and successful individuals who contribute positively to society.
+          <strong>Mission:</strong> To provide Quality Education In Order To Produce Individuals With Desired Knowledge Skills, Values and Attitude To Face The Present And Future Challenges.
         </p>
       </div>
 
@@ -265,9 +302,9 @@ const AboutPage = () => {
         <h3 className="text-2xl font-semibold text-blue-900 mb-3">School Statistics</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
           <div>
-            <h4 className="text-xl font-medium text-gray-800 mb-2">Infrastructure</h4>
+            <h4 className="text-xl font-medium text-gray-800 mb-2">Infrastructure & Classrooms</h4>
             <ul className="list-disc list-inside">
-              <li>No. of Classrooms: 9</li>
+              <li>No. of Classrooms: 16</li> {/* Updated */}
               <li>No. of Boys' Toilets: 2</li>
               <li>No. of Girls' Toilets: 2</li>
               <li>No. of Teachers' Toilets: 2</li>
@@ -276,16 +313,19 @@ const AboutPage = () => {
           <div>
             <h4 className="text-xl font-medium text-gray-800 mb-2">Enrollment & Staff</h4>
             <ul className="list-disc list-inside">
-              <li>Total Student Enrollment: 230</li>
-              <li>Non-teaching Male Staff: 3</li>
-              <li>Non-teaching Female Staff: 2</li>
-              <li>Other Male Staff: 7</li>
-              <li>Other Female Staff: 3</li>
-              <li>Student-Teacher Ratio: 23:1</li>
-              <li>Student-Classroom Ratio: 25.6:1</li>
+              <li>Total Student Enrollment: 371</li> {/* Updated */}
+              <li>Total Teachers: 20</li> {/* Updated */}
             </ul>
           </div>
         </div>
+      </div>
+
+      {/* School Motto */}
+      <div className="mb-8 p-6 bg-blue-100 rounded-lg shadow-sm text-center">
+        <h3 className="text-2xl font-semibold text-blue-900 mb-3">Our Motto</h3>
+        <p className="text-xl italic font-medium text-gray-800">
+          "The Fear Of The Lord For Discipline And Success."
+        </p>
       </div>
 
       <div>
@@ -308,107 +348,127 @@ const AboutPage = () => {
   );
 };
 
-// Academics Page Component (Enhanced)
+// Academics Page Component
 const AcademicsPage = () => {
   return (
-    <section className="bg-white p-8 rounded-lg shadow-md mb-8">
-      <h2 className="text-3xl font-bold text-red-800 mb-6 border-b-2 border-red-200 pb-2">Academics</h2>
+    <section
+      className="p-8 rounded-lg shadow-md mb-8 relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${ACADEMICS_BG_IMAGE})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="absolute inset-0 bg-white bg-opacity-80 rounded-lg"></div> {/* Overlay for readability */}
+      <div className="relative z-10"> {/* Content wrapper */}
+        <h2 className="text-3xl font-bold text-red-800 mb-6 border-b-2 border-red-200 pb-2">Academics</h2>
 
-      <div className="mb-8">
-        <h3 className="text-2xl font-semibold text-blue-900 mb-3">Curriculum</h3>
-        <p className="text-gray-700 leading-relaxed">
-          PIONEER ELITE ACADEMY follows the 8-4-4 Education System, a comprehensive curriculum designed to provide a strong foundation in core subjects while encouraging critical thinking, creativity, and problem-solving skills. We integrate modern pedagogical approaches with traditional teaching methods to ensure a dynamic and engaging learning experience for all students. Our curriculum is regularly reviewed and updated to align with national educational standards and global best practices.
-        </p>
-      </div>
+        <div className="mb-8">
+          <h3 className="text-2xl font-semibold text-blue-900 mb-3">Curriculum</h3>
+          <p className="text-gray-700 leading-relaxed">
+            PIONEER ELITE ACADEMY follows the CBC System, a comprehensive curriculum designed to provide a strong foundation in core subjects while encouraging critical thinking, creativity, and problem-solving skills. We integrate modern pedagogical approaches with traditional teaching methods to ensure a dynamic and engaging learning experience for all students. Our curriculum is regularly reviewed and updated to align with national educational standards and global best practices.
+          </p>
+        </div>
 
-      <div className="mb-8">
-        <h3 className="text-2xl font-semibold text-blue-900 mb-3">Subjects Offered</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-          <div className="bg-gray-100 p-5 rounded-lg shadow-sm">
-            <h4 className="text-xl font-medium text-gray-800 mb-2">Primary School</h4>
-            <ul className="list-disc list-inside text-gray-600">
-              <li>English Language Arts</li>
-              <li>Mathematics</li>
-              <li>Science</li>
-              <li>Social Studies</li>
-              <li>Art & Craft</li>
-              <li>Music</li>
-              <li>Physical Education</li>
-              <li>Computer Studies</li>
-            </ul>
-          </div>
-          <div className="bg-gray-100 p-5 rounded-lg shadow-sm">
-            <h4 className="text-xl font-medium text-gray-800 mb-2">Junior Secondary</h4>
-            <ul className="list-disc list-inside text-gray-600">
-              <li>English</li>
-              <li>Kiswahili</li>
-              <li>Mathematics</li>
-              <li>Integrated Science</li>
-              <li>History, Geography, CRE</li>
-            </ul>
-            <h4 className="text-xl font-medium text-gray-800 mt-4 mb-2">Electives/Optional Subjects</h4>
-            <ul className="list-disc list-inside text-gray-600">
-              <li>Computer Science</li>
-              <li>Technical Subjects (e.g., Agriculture, Home Science)</li>
-              <li>Performing Arts</li>
-              <li>French/German</li>
-            </ul>
+        <div className="mb-8">
+          <h3 className="text-2xl font-semibold text-blue-900 mb-3">Subjects Offered</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            <div className="bg-gray-100 p-5 rounded-lg shadow-sm">
+              <h4 className="text-xl font-medium text-gray-800 mb-2">Primary School</h4>
+              <ul className="list-disc list-inside text-gray-600">
+                <li>English Language Arts</li>
+                <li>Mathematics</li>
+                <li>Science</li>
+                <li>Social Studies</li>
+                <li>Art & Craft</li>
+                <li>Music</li>
+                <li>Physical Education</li>
+                <li>Computer Studies</li>
+              </ul>
+            </div>
+            <div className="bg-gray-100 p-5 rounded-lg shadow-sm">
+              <h4 className="text-xl font-medium text-gray-800 mb-2">Junior Secondary</h4>
+              <ul className="list-disc list-inside text-gray-600">
+                <li>English</li>
+                <li>Kiswahili</li>
+                <li>Mathematics</li>
+                <li>Integrated Science</li>
+                <li>History, Geography, CRE</li>
+              </ul>
+              <h4 className="text-xl font-medium text-gray-800 mt-4 mb-2">Electives/Optional Subjects</h4>
+              <ul className="list-disc list-inside text-gray-600">
+                <li>Computer Science</li>
+                <li>Technical Subjects (e.g., Agriculture, Home Science)</li>
+                <li>Performing Arts</li>
+                <li>French/German</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div>
-        <h3 className="text-2xl font-semibold text-blue-900 mb-3">Class Levels</h3>
-        <ul className="list-disc list-inside text-gray-700 leading-relaxed">
-          <li>Early Years (Pre-Kindergarten, Kindergarten)</li>
-          <li>Primary School (Grade 1 - Grade 6)</li>
-          <li>Junior Secondary School (Grade 7 - Grade 9)</li>
-        </ul>
-      </div>
+        <div>
+          <h3 className="text-2xl font-semibold text-blue-900 mb-3">Class Levels</h3>
+          <ul className="list-disc list-inside text-gray-700 leading-relaxed">
+            <li>Early Years (Pre-Kindergarten, Kindergarten)</li>
+            <li>Primary School (Grade 1 - Grade 6)</li>
+            <li>Junior Secondary School (Grade 7 - Grade 9)</li>
+          </ul>
+        </div>
 
-      {/* New Section: Best Performers */}
-      <div className="mt-8 bg-yellow-50 p-6 rounded-lg shadow-sm">
-        <h3 className="text-2xl font-semibold text-red-800 mb-3 flex items-center space-x-2">
-          <Award size={24} className="text-yellow-700" />
-          <span>Recognition of Best Performers</span>
-        </h3>
-        <p className="text-gray-700 leading-relaxed mb-4">
-          At Pioneer Elite Academy, we celebrate academic excellence and recognize students who consistently achieve outstanding results. Our dedicated programs and supportive environment empower students to reach their full potential.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-            <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
-            <p className="font-semibold text-gray-800">Jane Doe</p>
-            <p className="text-sm text-gray-600">Top in Mathematics, Grade 8</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-            <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
-            <p className="font-semibold text-gray-800">John Smith</p>
-            <p className="text-sm text-gray-600">Overall Best, Primary School</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-            <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
-            <p className="font-semibold text-gray-800">Emily White</p>
-            <p className="text-sm text-gray-600">Outstanding in Science, Grade 7</p>
+        {/* Section: Best Performers */}
+        <div className="mt-8 bg-yellow-50 p-6 rounded-lg shadow-sm">
+          <h3 className="text-2xl font-semibold text-red-800 mb-3 flex items-center space-x-2">
+            <Award size={24} className="text-yellow-700" />
+            <span>Recognition of Best Performers</span>
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            At Pioneer Elite Academy, we celebrate academic excellence and recognize students who consistently achieve outstanding results. Our dedicated programs and supportive environment empower students to reach their full potential.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="bg-white p-4 rounded-lg shadow-sm text-center">
+              <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
+              <p className="font-semibold text-gray-800">Jane Doe</p>
+              <p className="text-sm text-gray-600">Top in Mathematics, Grade 8</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-sm text-center">
+              <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
+              <p className="font-semibold text-gray-800">John Smith</p>
+              <p className="text-sm text-gray-600">Overall Best, Primary School</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-sm text-center">
+              <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
+              <p className="font-semibold text-gray-800">Emily White</p>
+              <p className="text-sm text-gray-600">Outstanding in Science, Grade 7</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-sm text-center">
+              <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
+              <p className="font-semibold text-gray-800">David Green</p>
+              <p className="text-sm text-gray-600">Top in English, Grade 6</p>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-sm text-center">
+              <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
+              <p className="font-semibold text-gray-800">Sarah Brown</p>
+              <p className="text-sm text-gray-600">Overall Best, Junior Secondary</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* New Section: History of School Performance */}
-      <div className="mt-8 bg-blue-50 p-6 rounded-lg shadow-sm">
-        <h3 className="text-2xl font-semibold text-green-800 mb-3 flex items-center space-x-2">
-          <Book size={24} className="text-blue-900" />
-          <span>History of School Performance</span>
-        </h3>
-        <p className="text-gray-700 leading-relaxed">
-          Pioneer Elite Academy has a proud history of consistent academic performance and improvement. Our students regularly achieve above national averages in key examinations, reflecting the effectiveness of our teaching methodologies and the dedication of our students. We continuously strive for excellence, adapting to new educational trends while maintaining our core values. Detailed performance reports are available upon request from the Academics office.
-        </p>
+        {/* Section: History of School Performance */}
+        <div className="mt-8 bg-blue-50 p-6 rounded-lg shadow-sm">
+          <h3 className="text-2xl font-semibold text-green-800 mb-3 flex items-center space-x-2">
+            <Book size={24} className="text-blue-900" />
+            <span>History of School Performance</span>
+          </h3>
+          <p className="text-gray-700 leading-relaxed">
+            Pioneer Elite Academy has a proud history of consistent academic performance and improvement. Our students regularly achieve above national averages in key examinations, reflecting the effectiveness of our teaching methodologies and the dedication of our students. We continuously strive for excellence, adapting to new educational trends while maintaining our core values. Detailed performance reports are available upon request from the Academics office.
+          </p>
+        </div>
       </div>
     </section>
   );
 };
 
-// Admissions Page Component (No changes from previous version)
+// Admissions Page Component
 const AdmissionsPage = () => {
   return (
     <section className="bg-white p-8 rounded-lg shadow-md mb-8">
@@ -421,7 +481,7 @@ const AdmissionsPage = () => {
         </p>
         <div className="text-center">
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSc_EXAMPLE_FORM_ID/viewform"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScNqbHWiut3ub7VrYyeIlZq3K0MnHOfdWxOiycs2a41Py1V_Q/viewform?usp=header" // Updated Google Form link
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-green-700 text-white px-6 py-3 rounded-full hover:bg-green-800 transition-colors text-lg flex items-center justify-center space-x-2"
@@ -437,12 +497,12 @@ const AdmissionsPage = () => {
 
       <div>
         <h3 className="text-2xl font-semibold text-blue-900 mb-3">Fee Structure</h3>
-        <p className="text-700 leading-relaxed mb-4">
+        <p className="text-gray-700 leading-relaxed mb-4">
           Our detailed fee structure, including various payment methods, is available for download below.
         </p>
         <div className="text-center">
           <a
-            href="https://example.com/pioneer_elite_fee_structure.pdf"
+            href="/images/pioneer_elite_fee_structure.pdf" // Updated path
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-yellow-600 text-white px-6 py-3 rounded-full hover:bg-yellow-700 transition-colors text-lg flex items-center justify-center space-x-2"
@@ -456,7 +516,7 @@ const AdmissionsPage = () => {
   );
 };
 
-// Gallery/Events Page Component (No changes from previous version)
+// Gallery/Events Page Component
 const GalleryEventsPage = () => {
   return (
     <section className="bg-white p-8 rounded-lg shadow-md mb-8">
@@ -471,13 +531,13 @@ const GalleryEventsPage = () => {
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <div key={i} className="relative group rounded-lg overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-300">
               <img
-                src={`https://placehold.co/400x300/c7d2fe/3730a3?text=Event+${i}`} // Placeholder image
+                src={`/images/cocurricular${i}.jpg`} // Updated path for co-curricular images
                 alt={`School Event ${i}`}
                 className="w-full h-48 object-cover"
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x300/c7d2fe/3730a3?text=Event+${i}`; }}
               />
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-white text-lg font-semibold">Event Title {i}</p>
+                <p className="text-white text-lg font-semibold">Activity {i}</p>
               </div>
             </div>
           ))}
@@ -532,19 +592,16 @@ const GalleryEventsPage = () => {
   );
 };
 
-// Staff Page Component (New)
+// Staff Page Component
 const StaffPage = () => {
   const staffMembers = [
-    { name: "Mr. David Kimani", title: "Head Teacher", img: "https://placehold.co/120x120/a3d9ff/000000?text=Staff+1" },
-    { name: "Ms. Sarah Adhiambo", title: "Deputy Head Teacher", img: "https://placehold.co/120x120/b3e0ff/000000?text=Staff+2" },
-    { name: "Mr. James Omondi", title: "Head of Academics", img: "https://placehold.co/120x120/c3e7ff/000000?text=Staff+3" },
-    { name: "Ms. Grace Wanjiku", title: "Primary Coordinator", img: "https://placehold.co/120x120/d3efff/000000?text=Staff+4" },
-    { name: "Mr. Peter Njoroge", title: "Junior Secondary Coordinator", img: "https://placehold.co/120x120/e3f2ff/000000?text=Staff+5" },
-    { name: "Ms. Fatuma Ali", title: "Admissions Officer", img: "https://placehold.co/120x120/f3faff/000000?text=Staff+6" },
+    { name: "Gideon Kiprotich Lagat", title: "Head Teacher", img: "/images/staff_gideon_lagat.jpg" }, // Updated
+    { name: "Fredrrick Olang", title: "Deputy Head", img: "/images/staff_fredrrick_olang.jpg" }, // Updated
+    { name: "Kiptoo Jepkosgei Sharon", title: "Head of Academics", img: "/images/staff_sharon_kiptoo.jpg" }, // Updated
   ];
 
   return (
-    <section className="bg-red-50 p-8 rounded-lg shadow-md mb-8"> {/* Light red background */}
+    <section className="bg-red-50 p-8 rounded-lg shadow-md mb-8">
       <h2 className="text-3xl font-bold text-blue-900 mb-6 border-b-2 border-blue-200 pb-2">Meet Our Staff</h2>
 
       <div className="mb-8">
@@ -579,17 +636,17 @@ const StaffPage = () => {
   );
 };
 
-// Student Life Page Component (New)
+// Student Life Page Component
 const StudentLifePage = () => {
   const coCurricularImages = [
-    "https://placehold.co/400x300/d3efff/000000?text=Sports+Day",
-    "https://placehold.co/400x300/e3f2ff/000000?text=Debate+Club",
-    "https://placehold.co/400x300/f3faff/000000?text=Art+Exhibition",
-    "https://placehold.co/400x300/c7d2fe/3730a3?text=Music+Concert",
+    "/images/cocurricular1.jpg", // Updated path
+    "/images/cocurricular2.jpg", // Updated path
+    "/images/cocurricular3.jpg", // Updated path
+    "/images/cocurricular4.jpg", // Updated path
   ];
 
   return (
-    <section className="bg-green-50 p-8 rounded-lg shadow-md mb-8"> {/* Light green background */}
+    <section className="bg-green-50 p-8 rounded-lg shadow-md mb-8">
       <h2 className="text-3xl font-bold text-blue-900 mb-6 border-b-2 border-blue-200 pb-2">Student Life at Pioneer Elite Academy</h2>
 
       <div className="mb-8">
@@ -630,86 +687,121 @@ const StudentLifePage = () => {
       <div>
         <h3 className="text-2xl font-semibold text-red-800 mb-3">Alumni History</h3>
         <p className="text-gray-700 leading-relaxed">
-          Our alumni are a testament to the strong foundation provided by Pioneer Elite Academy. Many have gone on to excel in various fields, becoming leaders, innovators, and positive contributors to society. We are proud of their achievements and maintain strong ties with our alumni network, encouraging them to mentor current students and share their experiences.
+          Our alumni are a testament to the strong foundation provided by Pioneer Elite Academy. Many have gone on to excel in various fields, becoming leaders, innovators, and positive contributors to society. We are proud of their achievements and maintain strong ties with our alumni network, encouraging them to mentor current students and share their experiences. Many of our esteemed alumni are now thriving in the diaspora, making significant contributions globally.
         </p>
-        <div className="bg-yellow-50 p-6 rounded-lg shadow-sm mt-4">
-          <h4 className="text-xl font-semibold text-blue-900 mb-2">Featured Alumni: Dr. Anya Sharma</h4>
-          <p className="text-gray-700 italic">
-            Dr. Anya Sharma, a graduate of the class of 20XX, is now a renowned medical researcher contributing significantly to public health initiatives. Her journey began right here at Pioneer Elite Academy, where she developed her passion for science and critical thinking.
-          </p>
+        <div className="bg-yellow-50 p-6 rounded-lg shadow-sm mt-4 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+          <img
+            src="/images/alumni_ruth_jebet_kiplagat.jpg" // Updated path
+            alt="Ruth Jebet Kiplagat"
+            className="rounded-full h-32 w-32 object-cover border-2 border-blue-600 flex-shrink-0"
+            onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/120x120/e0e0e0/333333?text=Alumni"; }}
+          />
+          <div>
+            <h4 className="text-xl font-semibold text-blue-900 mb-2">Featured Alumni: Ruth Jebet Kiplagat</h4>
+            <p className="text-gray-700 italic">
+              Ruth Jebet Kiplagat, the very first student of Pioneer Elite Academy in 2002, has carved a successful career in interior design. Her journey of creativity and innovation began right here, and we are incredibly proud of her accomplishments.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-// Contact Page Component (No changes from previous version)
+// Contact Page Component
 const ContactPage = () => {
+  const contactNumbers = [
+    { label: "Administration", numbers: ["+254722496897", "+254722286280"] },
+    { label: "Finance Office", numbers: ["+254724016006"] },
+    { label: "Academics", numbers: ["+254722496897"] },
+    { label: "Contact Center & Help", numbers: ["+254705926417"] },
+  ];
+
   return (
-    <section className="bg-white p-8 rounded-lg shadow-md mb-8">
-      <h2 className="text-3xl font-bold text-red-800 mb-6 border-b-2 border-red-200 pb-2">Contact Us</h2>
+    <section
+      className="p-8 rounded-lg shadow-md mb-8 relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${CONTACT_BG_IMAGE})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="absolute inset-0 bg-white bg-opacity-80 rounded-lg"></div> {/* Overlay for readability */}
+      <div className="relative z-10"> {/* Content wrapper */}
+        <h2 className="text-3xl font-bold text-red-800 mb-6 border-b-2 border-red-200 pb-2">Contact Us</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h3 className="text-2xl font-semibold text-blue-900 mb-3">Our Location</h3>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            Find us easily using the map below. We are conveniently located at:
-            <br /><br />
-            <strong>PIONEER ELITE ACADEMY</strong><br />
-            Uasin Gishu County<br />
-            Ainabkoi Sub-county<br />
-            Kenya
-          </p>
-          {/* Embedded Google Map */}
-          <div className="rounded-lg overflow-hidden shadow-md h-64 w-full">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.800757177756!2d35.52742507586663!3d0.17000536422999368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x178097a9b3e9d031%3A0x6c323231b3b82491!2sPioneer%20Elite%20Academy!5e0!3m2!1sen!2ske!4v1752305288698!5m2!1sen!2ske"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-2xl font-semibold text-blue-900 mb-3">Our Location</h3>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Find us easily using the map below. We are conveniently located at:
+              <br /><br />
+              <strong>PIONEER ELITE ACADEMY</strong><br />
+              P.O Box 4-30101, Ainabkoi<br /> {/* Added postal address */}
+              Uasin Gishu County<br />
+              Ainabkoi Sub-county<br />
+              Kenya
+            </p>
+            {/* Embedded Google Map */}
+            <div className="rounded-lg overflow-hidden shadow-md h-64 w-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.800757177756!2d35.52742507586663!3d0.17000536422999368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x178097a9b3e9d031%3A0x6c323231b3b82491!2sPioneer%20Elite%20Academy!5e0!3m2!1sen!2ske!4v1752305288698!5m2!1sen!2ske"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
-        </div>
 
-        <div>
-          <h3 className="text-2xl font-semibold text-blue-900 mb-3">Get in Touch</h3>
-          <ul className="space-y-4 text-gray-700 text-lg">
-            <li className="flex items-center space-x-3">
-              <Mail size={24} className="text-yellow-600" />
-              <span>Email: <a href="mailto:info@pioneerelite.edu" className="text-yellow-600 hover:underline">info@pioneerelite.edu</a></span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone text-yellow-600"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span>Administration: <a href="tel:+254722496897" className="text-yellow-600 hover:underline">+254722 496 897</a> / <a href="tel:+254722286280" className="text-yellow-600 hover:underline">+254722 286 280</a></span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-banknote text-yellow-600"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
-              <span>Finance Office: <a href="tel:+254724016006" className="text-yellow-600 hover:underline">+254724 016 006</a></span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-graduation-cap text-yellow-600"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.01 4.907a1 1 0 0 0-1.96 0L2.6 9.084a1 1 0 0 0-.02 1.838l8.416 4.085a1 1 0 0 0 .96 0l8.417-4.085Z"/><path d="M14.5 12.5v5.5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-5.5"/></svg>
-              <span>Academics: <a href="tel:+254722496897" className="text-yellow-600 hover:underline">+254722 496 897</a></span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-headset text-yellow-600"><path d="M21 17H3a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/><path d="M5 17V5a7 7 0 0 1 14 0v12"/></svg>
-              <span>Contact Center & Help: <a href="tel:+254705926417" className="text-yellow-600 hover:underline">+254705 926 417</a></span>
-            </li>
-          </ul>
+          <div>
+            <h3 className="text-2xl font-semibold text-blue-900 mb-3">Get in Touch</h3>
+            <ul className="space-y-4 text-gray-700 text-lg">
+              <li className="flex items-center space-x-3">
+                <Mail size={24} className="text-yellow-600" />
+                <span>Email: <a href="mailto:info@pioneerelite.edu" className="text-yellow-600 hover:underline">info@pioneerelite.edu</a></span>
+              </li>
+              {contactNumbers.map((contact, index) => (
+                <li key={index}>
+                  <span className="font-semibold flex items-center space-x-3">
+                    {contact.label === "Administration" && <Phone size={24} className="text-yellow-600" />}
+                    {contact.label === "Finance Office" && <Briefcase size={24} className="text-yellow-600" />}
+                    {contact.label === "Academics" && <Book size={24} className="text-yellow-600" />}
+                    {contact.label === "Contact Center & Help" && <Headset size={24} className="text-yellow-600" />}
+                    <span>{contact.label}:</span>
+                  </span>
+                  <div className="flex flex-wrap gap-2 mt-1 ml-9">
+                    {contact.numbers.map((number, numIndex) => (
+                      <React.Fragment key={numIndex}>
+                        <a href={`tel:${number}`} className="text-blue-600 hover:underline flex items-center space-x-1">
+                          <Phone size={18} />
+                          <span>{number} (Call)</span>
+                        </a>
+                        <a href={`https://wa.me/${number}?text=Hi%2C%20I%20need%20help%20from%20Pioneer%20Elite%20Academy.`} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline flex items-center space-x-1">
+                          <MessageSquare size={18} />
+                          <span>{number} (WhatsApp)</span>
+                        </a>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
 
-          <h3 className="text-2xl font-semibold text-blue-900 mt-8 mb-3">Social Media</h3>
-          <div className="flex space-x-4">
-            <a href="https://facebook.com/pioneereliteacademy" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:text-yellow-700 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.016 3.657 9.184 8.438 9.878V14.5H7.5V12h2.938V9.5c0-2.92 1.782-4.5 4.368-4.5 1.246 0 2.327.089 2.64.128v2.85h-1.68c-1.32 0-1.578.628-1.578 1.55v1.86h3.136l-.504 2.5H14.5V22c4.781-.694 8.438-4.862 8.438-9.878C22 6.477 17.523 2 12 2z"/></svg>
-            </a>
-            <a href="https://twitter.com/pioneereliteacademy" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:text-yellow-700 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.4.5-2.2.6.8-.5 1.4-1.2 1.7-2.1-.8.5-1.7.9-2.7 1.1-.7-.7-1.7-1.2-2.8-1.2-2.1 0-3.8 1.7-3.8 3.8 0 .3.03.6.1.9C8.3 9.4 5.5 7.9 3.7 5.1c-.3.5-.4 1-.4 1.6 0 1.3.7 2.4 1.7 3.1-.6 0-1.2-.2-1.7-.5v.05c0 1.8 1.3 3.3 3 3.6-.3.08-.6.1-.9.1-.2 0-.4 0-.6-.05.5 1.5 1.8 2.6 3.4 2.6-1.3 1-2.9 1.6-4.6 1.6-.3 0-.6 0-.9-.05C4.3 19.3 6.3 20 8.5 20c10.2 0 15.7-8.5 15.7-15.7V4c.7-.5 1.3-1.1 1.8-1.8z"/></svg>
-            </a>
-            <a href="https://instagram.com/pioneereliteacademy" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:text-yellow-700 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2A2.8 2.8 0 0 0 5 7.8v8.4c0 1.54.4 2.2 2.8 2.2h8.4c1.54 0 2.2-.4 2.2-2.8V7.8c0-1.54-.4-2.2-2.8-2.2H7.6z"/><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm6.5-3.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5z"/></svg>
-            </a>
+            <h3 className="text-2xl font-semibold text-blue-900 mt-8 mb-3">Social Media</h3>
+            <div className="flex space-x-4">
+              <a href="https://facebook.com/pioneereliteacademy" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:text-yellow-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.016 3.657 9.184 8.438 9.878V14.5H7.5V12h2.938V9.5c0-2.92 1.782-4.5 4.368-4.5 1.246 0 2.327.089 2.64.128v2.85h-1.68c-1.32 0-1.578.628-1.578 1.55v1.86h3.136l-.504 2.5H14.5V22c4.781-.694 8.438-4.862 8.438-9.878C22 6.477 17.523 2 12 2z"/></svg>
+              </a>
+              <a href="https://twitter.com/pioneereliteacademy" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:text-yellow-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.4.5-2.2.6.8-.5 1.4-1.2 1.7-2.1-.8.5-1.7.9-2.7 1.1-.7-.7-1.7-1.2-2.8-1.2-2.1 0-3.8 1.7-3.8 3.8 0 .3.03.6.1.9C8.3 9.4 5.5 7.9 3.7 5.1c-.3.5-.4 1-.4 1.6 0 1.3.7 2.4 1.7 3.1-.6 0-1.2-.2-1.7-.5v.05c0 1.8 1.3 3.3 3 3.6-.3.08-.6.1-.9.1-.2 0-.4 0-.6-.05.5 1.5 1.8 2.6 3.4 2.6-1.3 1-2.9 1.6-4.6 1.6-.3 0-.6 0-.9-.05C4.3 19.3 6.3 20 8.5 20c10.2 0 15.7-8.5 15.7-15.7V4c.7-.5 1.3-1.1 1.8-1.8z"/></svg>
+              </a>
+              <a href="https://instagram.com/pioneereliteacademy" target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:text-yellow-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2A2.8 2.8 0 0 0 5 7.8v8.4c0 1.54.4 2.2 2.8 2.2h8.4c1.54 0 2.2-.4 2.2-2.8V7.8c0-1.54-.4-2.2-2.8-2.2H7.6z"/><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm6.5-3.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5z"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
