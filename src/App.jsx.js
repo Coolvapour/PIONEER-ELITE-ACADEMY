@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Home as HomeIcon, Info, Book, UserPlus, Image, Mail, Menu, X, Download, Monitor, Users, Award, Briefcase, Phone, MessageSquare, MapPin, Headset } from 'lucide-react'; // Added Headset icon explicitly here as it was used but not imported in the previous selection
 
 // Image and PDF Naming Conventions for your /public/images folder
-// Slideshow Images: slideshow1.jpg, slideshow2.jpg, slideshow3.jpg
-// Staff Photos: staff_gideon_lagat.jpg, staff_fredrrick_olang.jpg, staff_sharon_kiptoo.jpg
-// Co-curricular Images: cocurricular1.jpg, cocurricular2.jpg, cocurricular3.jpg, cocurricular4.jpg
-// Alumni Photo: alumni_ruth_jebet_kiplagat.jpg
+// Slideshow Images: slideshow1.PNG, slideshow2.PNG, slideshow3.PNG
+// Staff Photos: staff_gideon_lagat.PNG, staff_fredrrick_olang.PNG, staff_sharon_kiptoo.PNG
+// Co-curricular Images: cocurricular1.PNG, cocurricular2.PNG, cocurricular3.PNG, cocurricular4.PNG
+// Alumni Photo: alumni_ruth_jebet_kiplagat.PNG
 // Fee Structure PDF: pioneer_elite_fee_structure.pdf
 
 // Background Images (will be applied as inline styles with specific URLs)
@@ -73,7 +73,7 @@ const Header = ({ setActivePage, isNavOpen, setIsNavOpen }) => {
   ];
 
   return (
-    <header className="bg-blue-950 text-white shadow-lg sticky top-0 z-50">
+    <header className="bg-blue-950 text-white shadow-lg sticky top-0 z-70">
       <div className="container mx-auto flex items-center justify-between p-4 flex-wrap">
         <div className="flex items-center space-x-3">
           <img
@@ -145,9 +145,9 @@ const Footer = () => {
 const HomePage = ({ handleNavClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    "/images/slideshow1.jpg", // Updated path
-    "/images/slideshow2.jpg", // Updated path
-    "/images/slideshow3.jpg", // Updated path
+    "/images/slideshow1.PNG", // Updated path
+    "/images/slideshow2.PNG", // Updated path
+    "/images/slideshow3.PNG", // Updated path
   ];
 
   useEffect(() => {
@@ -532,7 +532,7 @@ const GalleryEventsPage = () => {
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <div key={i} className="relative group rounded-lg overflow-hidden shadow-md transform hover:scale-105 transition-transform duration-300">
               <img
-                src={`/images/cocurricular${i}.jpg`} // Updated path for co-curricular images
+                src={`/images/cocurricular${i}.PNG`} // Updated path for co-curricular images
                 alt={`School Event ${i}`}
                 className="w-full h-48 object-cover"
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x300/c7d2fe/3730a3?text=Event+${i}`; }}
@@ -596,9 +596,9 @@ const GalleryEventsPage = () => {
 // Staff Page Component
 const StaffPage = () => {
   const staffMembers = [
-    { name: "Gideon Kiprotich Lagat", title: "Head Teacher", img: "/images/staff_gideon_lagat.jpg" }, // Updated
-    { name: "Fredrrick Olang", title: "Deputy Head", img: "/images/staff_fredrrick_olang.jpg" }, // Updated
-    { name: "Kiptoo Jepkosgei Sharon", title: "Head of Academics", img: "/images/staff_sharon_kiptoo.jpg" }, // Updated
+    { name: "Mr Gideon Kiprotich Lagat", title: "Head Teacher", img: "/images/staff_gideon_lagat.PNG" }, // Updated
+    { name: "Mr Fredrrick Olang", title: "Deputy Head", img: "/images/staff_fredrrick_olang.PNG" }, // Updated
+    { name: "Ms Kiptoo Jepkosgei Sharon", title: "Head of Academics", img: "/images/staff_sharon_kiptoo.PNG" }, // Updated
   ];
 
   return (
@@ -640,10 +640,10 @@ const StaffPage = () => {
 // Student Life Page Component
 const StudentLifePage = () => {
   const coCurricularImages = [
-    "/images/cocurricular1.jpg", // Updated path
-    "/images/cocurricular2.jpg", // Updated path
-    "/images/cocurricular3.jpg", // Updated path
-    "/images/cocurricular4.jpg", // Updated path
+    "/images/cocurricular1.PNG", // Updated path
+    "/images/cocurricular2.PNG", // Updated path
+    "/images/cocurricular3.PNG", // Updated path
+    "/images/cocurricular4.PNG", // Updated path
   ];
 
   return (
@@ -692,7 +692,7 @@ const StudentLifePage = () => {
         </p>
         <div className="bg-yellow-50 p-6 rounded-lg shadow-sm mt-4 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
           <img
-            src="/images/alumni_ruth_jebet_kiplagat.jpg" // Updated path
+            src="/images/alumni_ruth_jebet_kiplagat.PNG" // Updated path
             alt="Ruth Jebet Kiplagat"
             className="rounded-full h-32 w-32 object-cover border-2 border-blue-600 flex-shrink-0"
             onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/120x120/e0e0e0/333333?text=Alumni"; }}
