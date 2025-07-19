@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Home as HomeIcon, Info, Book, UserPlus, Image, Mail, Menu, X, Download, Monitor, Users, Award, Briefcase, Phone, MessageSquare, MapPin, Headset } from 'lucide-react'; // Added Headset icon explicitly here as it was used but not imported in the previous selection
 
 // Image and PDF Naming Conventions for your /public/images folder
-// Slideshow Images: slideshow1.PNG, slideshow2.PNG, slideshow3.PNG
-// Staff Photos: staff_gideon_lagat.PNG, staff_fredrrick_olang.PNG, staff_sharon_kiptoo.PNG
-// Co-curricular Images: cocurricular1.PNG, cocurricular2.PNG, cocurricular3.PNG, cocurricular4.PNG
-// Alumni Photo: alumni_ruth_jebet_kiplagat.PNG
+// Slideshow Images: slideshow1.jpg, slideshow2.jpg, slideshow3.jpg
+// Staff Photos: staff_gideon_lagat.jpg, staff_fredrrick_olang.jpg, staff_sharon_kiptoo.jpg
+// Co-curricular Images: cocurricular1.jpg, cocurricular2.jpg, cocurricular3.jpg, cocurricular4.jpg
+// Alumni Photo: alumni_ruth_jebet_kiplagat.jpg
 // Fee Structure PDF: pioneer_elite_fee_structure.pdf
 
 // Background Images (will be applied as inline styles with specific URLs)
@@ -73,11 +73,11 @@ const Header = ({ setActivePage, isNavOpen, setIsNavOpen }) => {
   ];
 
   return (
-    <header className="bg-blue-950 text-white shadow-lg sticky top-0 z-70">
+    <header className="bg-blue-950 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between p-4 flex-wrap">
         <div className="flex items-center space-x-3">
           <img
-            src="/images/pioneer_logo.jpeg" // Reverted to original link
+            src="https://digiskool.co.ke/pioneer-elite/upload/pioneer_logo.jpeg" // Reverted to original link
             alt="Pioneer Elite Academy Logo"
             className="rounded-full h-10 w-10 object-cover"
             onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/ffffff/000000?text=PEA"; }}
@@ -135,7 +135,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <p>&copy; {new Date().getFullYear()} PIONEER ELITE ACADEMY. All rights reserved.</p>
         <p className="mt-2 text-sm">Designed with <span className="text-red-500">&hearts;</span> for education.</p>
-        <p className="mt-2 text-sm">Designed by Rimo Software Company.</p>
+        <p className="mt-2 text-sm">Designed by <a href="https://rimotechnologies.vecel.app" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Rimo Technologies</a></p>
       </div>
     </footer>
   );
@@ -145,9 +145,9 @@ const Footer = () => {
 const HomePage = ({ handleNavClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    "/images/slideshow1.png", // Updated path
-    "/images/slideshow2.png", // Updated path
-    "/images/slideshow3.png", // Updated path
+    "/images/slideshow1.jpg", // Updated path
+    "/images/slideshow2.jpg", // Updated path
+    "/images/slideshow3.jpg", // Updated path
   ];
 
   useEffect(() => {
@@ -686,7 +686,7 @@ const StudentLifePage = () => {
       </div>
 
       <div>
-        <h3 className="text-2xl font-semibold text-red-800 mb-3">Alumni History</h3>
+        <h3 className="2xl font-semibold text-red-800 mb-3">Alumni History</h3>
         <p className="text-gray-700 leading-relaxed">
           Our alumni are a testament to the strong foundation provided by Pioneer Elite Academy. Many have gone on to excel in various fields, becoming leaders, innovators, and positive contributors to society. We are proud of their achievements and maintain strong ties with our alumni network, encouraging them to mentor current students and share their experiences. Many of our esteemed alumni are now thriving in the diaspora, making significant contributions globally.
         </p>
