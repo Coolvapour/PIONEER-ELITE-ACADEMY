@@ -135,7 +135,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <p>&copy; {new Date().getFullYear()} PIONEER ELITE ACADEMY. All rights reserved.</p>
         <p className="mt-2 text-sm">Designed with <span className="text-red-500">&hearts;</span> for education.</p>
-        <p className="mt-2 text-sm">Designed by <a href="https://rimotechnologies.vecel.app" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Rimo Technologies</a></p>
+        <p className="mt-2 text-sm">Designed by <a href="https://rimotechnologies.vercel.app" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Rimo Technologies</a></p>
       </div>
     </footer>
   );
