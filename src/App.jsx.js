@@ -77,7 +77,7 @@ const Header = ({ setActivePage, isNavOpen, setIsNavOpen }) => {
       <div className="container mx-auto flex items-center justify-between p-4 flex-wrap">
         <div className="flex items-center space-x-3">
           <img
-            src="https://digiskool.co.ke/pioneer-elite/upload/pioneer_logo.jpeg" // Reverted to original link
+            src="/images/pioneer_logo.jpeg" // Reverted to original link
             alt="Pioneer Elite Academy Logo"
             className="rounded-full h-10 w-10 object-cover"
             onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/ffffff/000000?text=PEA"; }}
@@ -145,9 +145,9 @@ const Footer = () => {
 const HomePage = ({ handleNavClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    "/images/slideshow1.PNG", // Updated path
-    "/images/slideshow2.PNG", // Updated path
-    "/images/slideshow3.PNG", // Updated path
+    "/images/slideshow1.png", // Updated path
+    "/images/slideshow2.png", // Updated path
+    "/images/slideshow3.png", // Updated path
   ];
 
   useEffect(() => {
