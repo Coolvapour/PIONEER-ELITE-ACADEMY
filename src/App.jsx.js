@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home as HomeIcon, Info, Book, UserPlus, Image, Mail, Menu, X, Download, Monitor, Users, Award, Briefcase, Phone, MessageSquare, MapPin, Headset } from 'lucide-react'; // Added Headset icon explicitly here as it was used but not imported in the previous selection
+import { Home as HomeIcon, Info, Book, UserPlus, Image, Mail, Menu, X, Download, Monitor, Users, Award, Briefcase, Phone, MessageSquare, MapPin, Headset, BookOpen, Smartphone } from 'lucide-react'; // Added Smartphone icon for the app download
 
 // Image and PDF Naming Conventions for your /public/images folder
 // Slideshow Images: slideshow1.jpg, slideshow2.jpg, slideshow3.jpg
@@ -43,6 +43,8 @@ const App = () => {
         return <StudentLifePage />;
       case 'contact':
         return <ContactPage />;
+      case 'manual': // New case for the online manual
+        return <OnlineManualPage />;
       default:
         return <HomePage handleNavClick={handleNavClick} />;
     }
@@ -70,6 +72,7 @@ const Header = ({ setActivePage, isNavOpen, setIsNavOpen }) => {
     { name: 'Staff', icon: Users, page: 'staff' },
     { name: 'Student Life', icon: Award, page: 'student-life' },
     { name: 'Contact', icon: Mail, page: 'contact' },
+    { name: 'Online Manual', icon: BookOpen, page: 'manual' }, // New nav item for the manual
   ];
 
   return (
@@ -77,7 +80,7 @@ const Header = ({ setActivePage, isNavOpen, setIsNavOpen }) => {
       <div className="container mx-auto flex items-center justify-between p-4 flex-wrap">
         <div className="flex items-center space-x-3">
           <img
-            src="/images/pioneer_logo.jpeg" // Reverted to original link
+            src="https://digiskool.co.ke/pioneer-elite/upload/pioneer_logo.jpeg"
             alt="Pioneer Elite Academy Logo"
             className="rounded-full h-10 w-10 object-cover"
             onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/40x40/ffffff/000000?text=PEA"; }}
@@ -135,7 +138,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <p>&copy; {new Date().getFullYear()} PIONEER ELITE ACADEMY. All rights reserved.</p>
         <p className="mt-2 text-sm">Designed with <span className="text-red-500">&hearts;</span> for education.</p>
-        <p className="mt-2 text-sm">Designed by <a href="https://rimotechnologies.vercel.app" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Rimo Technologies</a></p>
+        <p className="mt-2 text-sm">Designed by <a href="https://rimotechnologies.vecel.app" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Rimo Technologies</a></p>
       </div>
     </footer>
   );
@@ -145,9 +148,9 @@ const Footer = () => {
 const HomePage = ({ handleNavClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    "/images/slideshow1.png", // Updated path
-    "/images/slideshow2.png", // Updated path
-    "/images/slideshow3.png", // Updated path
+    "/images/slideshow1.PNG", // Updated path
+    "/images/slideshow2.PNG", // Updated path
+    "/images/slideshow3.PNG", // Updated path
   ];
 
   useEffect(() => {
@@ -228,6 +231,7 @@ const HomePage = ({ handleNavClick }) => {
             <button onClick={() => handleNavClick('staff')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">Our Staff</button>
             <button onClick={() => handleNavClick('student-life')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">Student Life</button>
             <button onClick={() => handleNavClick('gallery')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">Gallery & Events</button>
+            <button onClick={() => handleNavClick('manual')} className="bg-blue-100 text-blue-800 py-3 px-4 rounded-lg shadow-sm hover:bg-blue-200 transition-colors text-center">Online Manual</button>
           </div>
         </div>
 
@@ -247,10 +251,20 @@ const HomePage = ({ handleNavClick }) => {
               rel="noopener noreferrer"
               className="inline-block bg-yellow-600 text-blue-950 px-8 py-3 rounded-full font-semibold hover:bg-yellow-500 transition-colors text-lg shadow-md"
             >
-              Access Login Portal
+              Access Web Login Portal
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.bigbrainzsolutions.digiskoolapp&hl=en&pli=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors text-lg shadow-md flex items-center justify-center space-x-2"
+            >
+              <Smartphone size={20} />
+              <span>Download Mobile App</span>
             </a>
             {/* Request Login Credentials section with WhatsApp and Call options */}
-            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+            <div className="flex flex-col space-y-3 sm:space-y-0 sm:space-x-3 sm:flex-row">
+              <p className="text-white text-base sm:text-lg">For web portal credentials or help:</p>
               <a
                 href="https://wa.me/254705926417?text=Hi%2C%20I%20need%20help%20with%20my%20login%20credentials%20for%20the%20Online%20School%20Management%20System."
                 target="_blank"
@@ -262,12 +276,13 @@ const HomePage = ({ handleNavClick }) => {
               </a>
               <a
                 href="tel:+254705926417"
-                className="inline-block bg-red-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-800 transition-colors text-lg shadow-md flex items-center space-x-2"
+                className="inline-block bg-red-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-800 transition-colors text-lg shadow-md flex items-center justify-center space-x-2"
               >
                 <Phone size={20} />
                 <span>Call Help</span>
               </a>
             </div>
+            <p className="text-white text-base sm:text-lg mt-4">Note: The mobile app offers self-service login for parents.</p>
           </div>
         </div>
       </div>
@@ -686,7 +701,7 @@ const StudentLifePage = () => {
       </div>
 
       <div>
-        <h3 className="2xl font-semibold text-red-800 mb-3">Alumni History</h3>
+        <h3 className="text-2xl font-semibold text-red-800 mb-3">Alumni History</h3>
         <p className="text-gray-700 leading-relaxed">
           Our alumni are a testament to the strong foundation provided by Pioneer Elite Academy. Many have gone on to excel in various fields, becoming leaders, innovators, and positive contributors to society. We are proud of their achievements and maintain strong ties with our alumni network, encouraging them to mentor current students and share their experiences. Many of our esteemed alumni are now thriving in the diaspora, making significant contributions globally.
         </p>
@@ -805,6 +820,67 @@ const ContactPage = () => {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+  );
+};
+
+// New Online Manual Component
+const OnlineManualPage = () => {
+  return (
+    <section className="bg-white p-8 rounded-lg shadow-md mb-8">
+      <h2 className="text-3xl font-bold text-red-800 mb-6 border-b-2 border-red-200 pb-2">Online Manual</h2>
+
+      <div className="prose max-w-none text-gray-700 leading-relaxed">
+        <h3>Welcome to the Pioneer Elite Academy Website Manual!</h3>
+        <p>
+          This manual provides a comprehensive guide to navigating and utilizing the various features of the Pioneer Elite Academy website. Our goal is to make your online experience as smooth and informative as possible.
+        </p>
+
+        <h4>1. Navigating the Website</h4>
+        <p>
+          The website is organized into several key sections, accessible via the navigation bar at the top of every page.
+        </p>
+        <ul>
+          <li><strong>Home:</strong> The landing page, offering a general overview of the school, a slideshow of school life, quick links to important sections, and information about our online management system.</li>
+          <li><strong>About:</strong> Learn about our school's vision, mission, history, key statistics (classrooms, enrollment, staff), and a message from the Principal.</li>
+          <li><strong>Academics:</strong> Discover our CBC curriculum, subjects offered for Primary and Junior Secondary levels, class levels, recognition of best performers, and the history of school performance.</li>
+          <li><strong>Admissions:</strong> Find out how to apply to Pioneer Elite Academy and download our detailed fee structure.</li>
+          <li><strong>Gallery/Events:</strong> Explore photos and videos from school events and view our comprehensive event calendar.</li>
+          <li><strong>Staff:</strong> Meet our dedicated team of educators and learn more about the school's culture.</li>
+          <li><strong>Student Life:</strong> Get insights into student leadership, a wide range of co-curricular activities, and a spotlight on our successful alumni.</li>
+          <li><strong>Contact:</strong> Find our location on a map, postal address, email, and various contact numbers for different departments, along with links to our social media pages.</li>
+        </ul>
+
+        <h4>2. Online School Management System (OSMS)</h4>
+        <p>
+          Pioneer Elite Academy utilizes a robust Online School Management System (OSMS) to streamline various school activities. This system provides dedicated portals for parents and students.
+        </p>
+        <ul>
+          <li><strong>Accessing the Web Login Portal:</strong> Click the "Access Web Login Portal" button on the Home page to go to the OSMS web login page.</li>
+          <li><strong>Downloading the Mobile App:</strong> For a convenient mobile experience, you can download our official app from the Google Play Store by clicking the "Download Mobile App" button on the Home page.</li>
+          <li><strong>Login Credentials (Web Portal):</strong> If you need your login credentials for the *web portal* or assistance with your web account, please contact our help center directly:
+            <ul>
+              <li><strong>WhatsApp Help:</strong> Click the "WhatsApp Help" button to send a pre-filled message to our support team.</li>
+              <li><strong>Call Help:</strong> Click the "Call Help" button to directly call our support team.</li>
+            </ul>
+            Please note that for security reasons, passwords for the web portal are not sent automatically. Our help center staff will assist you securely.
+          </li>
+          <li><strong>Login Credentials (Mobile App):</strong> The mobile app offers a self-service login option for parents, allowing for easier access to their accounts.</li>
+          <li><strong>Parent Portal:</strong> Parents can view fee balances, check examination results, and receive important termly notifications from the school.</li>
+          <li><strong>Student Portal:</strong> Students can access their academic information, class schedules, and other relevant school data.</li>
+        </ul>
+
+        <h4>3. Important Information</h4>
+        <ul>
+          <li><strong>Fee Structure:</strong> The detailed fee structure can be downloaded from the "Admissions" page.</li>
+          <li><strong>Google Form for Applications:</strong> New student applications are processed through a secure Google Form, linked on the "Admissions" page.</li>
+          <li><strong>Contacting Departments:</strong> For specific inquiries, use the direct call or WhatsApp options listed under "Contact Us" for Administration, Finance, Academics, and General Help.</li>
+        </ul>
+
+        <p>
+          We hope this manual helps you make the most of the Pioneer Elite Academy website. For any further assistance, please do not hesitate to contact us.
+        </p>
       </div>
     </section>
   );
