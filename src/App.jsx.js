@@ -148,9 +148,9 @@ const Footer = () => {
 const HomePage = ({ handleNavClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    "/images/slideshow1.PNG", // Updated path
-    "/images/slideshow2.PNG", // Updated path
-    "/images/slideshow3.PNG", // Updated path
+    "/images/slideshow1.png", // Updated path
+    "/images/slideshow2.png", // Updated path
+    "/images/slideshow3.png", // Updated path
   ];
 
   useEffect(() => {
