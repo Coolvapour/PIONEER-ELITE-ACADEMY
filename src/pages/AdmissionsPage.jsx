@@ -44,7 +44,7 @@ const AdmissionsPage = () => {
           We process new student applications through a secure Google Form. Please click the button below to access the application form. Ensure all required fields are filled accurately.
         </p>
         <a
-          href="https://forms.gle/yourGoogleFormLinkHere" // Placeholder Google Form link
+          href="https://docs.google.com/forms/d/e/1FAIpQLScNqbHWiut3ub7VrYyeIlZq3K0MnHOfdWxOiycs2a41Py1V_Q/viewform" // Placeholder Google Form link
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center bg-purple-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-800 transition-colors text-lg shadow-md"
