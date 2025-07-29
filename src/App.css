@@ -1,0 +1,9 @@
+ssbody {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f9f9f9;
+}
+
+* {
+  box-sizing: border-box;
+}
