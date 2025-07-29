@@ -8,8 +8,8 @@ const HomePage = () => { // Removed handleNavClick prop
   const images = [
     "/images/slideshow1.png", // Original first image
     "/images/slideshow2.jpg", // Original second image
-    "/images/Snapchat-150000000.jpg", // Original third image
-    "/images/Snapchat-150000000.jpg", // Randomly selected image from gallery (placeholder for a new one)
+    "/images/slideshow3.jpg", // Original third image
+    "/images/slideshow3.jpg", // Randomly selected image from gallery (placeholder for a new one)
     "/images/Snapchat-142410687.jpg", // Image 38 from gallery (index 37 in full gallery list)
     "/images/Snapchat-1344013105.jpg", // Image 34 from gallery (index 33 in full gallery list) - new additional slot
   ];
