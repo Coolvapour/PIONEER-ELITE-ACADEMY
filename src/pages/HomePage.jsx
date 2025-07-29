@@ -6,10 +6,10 @@ const HomePage = () => { // Removed handleNavClick prop
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate(); // Initialize useNavigate hook
   const images = [
-    "/images/slideshow1.PNG", // Original first image
+    "/images/slideshow1.png", // Original first image
     "/images/slideshow2.jpg", // Original second image
-    "/images/slideshow3.jpg", // Original third image
-    "/images/Snapchat-150000000.jpg", // Randomly selected image from gallery (placeholder for a new one)
+    "/images/slideshow.jpg", // Original third image
+    "/images/slideshow.jpg", // Randomly selected image from gallery (placeholder for a new one)
     "/images/Snapchat-142410687.jpg", // Image 38 from gallery (index 37 in full gallery list)
     "/images/Snapchat-1344013105.jpg", // Image 34 from gallery (index 33 in full gallery list) - new additional slot
   ];
