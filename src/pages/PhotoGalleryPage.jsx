@@ -136,31 +136,31 @@ const PhotoGalleryPage = ({ openImageModal }) => {
         <div className="bg-green-50 dark:bg-green-900 p-6 rounded-lg shadow-sm">
           <ul className="space-y-4">
             <li className="flex items-start">
-              <span className="bg-yellow-200 dark:bg-yellow-700 text-yellow-800 dark:text-yellow-200 font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">JUL 15</span>
+              <span className="bg-yellow-200 dark:bg-yellow-700 text-yellow-800 dark:text-yellow-200 font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">JUL 18</span>
               <div>
-                <p className="font-semibold text-gray-800 dark:text-gray-200">Parent-Teacher Conference</p>
+                <p className="font-semibold text-gray-800 dark:text-gray-200">Prayer Day</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">9:00 AM - 4:00 PM, School Hall</p>
               </div>
             </li>
             <li className="flex items-start">
-              <span className="bg-red-200 dark:bg-red-700 text-red-800 dark:text-red-200 font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">AUG 01</span>
+              <span className="bg-red-200 dark:bg-red-700 text-red-800 dark:text-red-200 font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">AUG 26</span>
               <div>
-                <p className="font-semibold text-gray-800 dark:text-gray-200">New Academic Year Begins</p>
+                <p className="font-semibold text-gray-800 dark:text-gray-200">New Academic Term Begins</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">All students report</p>
               </div>
             </li>
             <li className="flex items-start">
-              <span className="bg-yellow-200 dark:bg-yellow-700 text-yellow-800 dark:text-yellow-200 font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">SEP 10</span>
+              <span className="bg-yellow-200 dark:bg-yellow-700 text-yellow-800 dark:text-yellow-200 font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">OCT 28</span>
               <div>
-                <p className="font-semibold text-gray-800 dark:text-gray-200">Annual Sports Day</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">8:00 AM - 1:00 PM, School Field</p>
+                <p className="font-semibold text-gray-800 dark:text-gray-200">Official Closing Ceremony</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">8:00 AM - 1:00 PM, School Hall</p>
               </div>
             </li>
             <li className="flex items-start">
-              <span className="bg-red-200 dark:bg-red-700 text-red-800 dark:text-red-200 font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">OCT 20</span>
+              <span className="bg-red-200 dark:bg-red-700 text-red-800 dark:text-red-200 font-bold px-3 py-1 rounded-full mr-3 flex-shrink-0">OCT 27</span>
               <div>
-                <p className="font-semibold text-gray-800 dark:text-gray-200">Arts & Culture Festival</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">6:00 PM, Auditorium</p>
+                <p className="font-semibold text-gray-800 dark:text-gray-200">The KJSEA exams kick-off</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">8:00 AM-4:00 PM, Designated areas</p>
               </div>
             </li>
           </ul>

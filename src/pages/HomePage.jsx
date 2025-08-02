@@ -30,6 +30,8 @@ const HomePage = () => { // Removed handleNavClick prop
     "26th Jun – 1st July 2025 – Half-term Break",
     "27th Jun 2025 – Mathematics Contest",
     "18th July 2025 – Prayer Day",
+    "28th July 2025 – Closing Day",
+    "26th August, 2025 – Opening Day",
   ].sort((a, b) => {
     // Simple date parsing for sorting. Assumes format "DDth Month YYYY" or "DDth Mon YYYY"
     const parseDate = (eventString) => {
