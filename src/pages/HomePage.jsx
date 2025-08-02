@@ -198,7 +198,7 @@ const HomePage = () => { // Removed handleNavClick prop
             <h4 className="text-2xl font-semibold text-blue-900 dark:text-blue-300 mb-3">WHO we are</h4>
             <h5 className="text-xl font-bold text-red-700 dark:text-red-400 mb-2">BRIEF HISTORY OF THE SCHOOL</h5>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              PIONEER ELITE ACADEMY is a private, ordinary, day and boarding school offering co-education for boys and girls. Founded in 2002, our school began with a vision to provide quality education in a rapidly growing community. Starting with a small group of dedicated teachers and a handful of students, we have grown steadily over the decades, expanding our facilities and curriculum to meet the evolving needs of our students. Our rich history is built on a foundation of academic rigor, strong community ties, and a commitment to nurturing well-rounded individuals.
+              PIONEER ELITE ACADEMY is a private, comprehensive, day and boarding school offering co-education for boys and girls. Founded in 2002, our school began with a vision to provide quality education in a rapidly growing community. Starting with a small group of dedicated teachers and a handful of students, we have grown steadily over the decades, expanding our facilities and curriculum to meet the evolving needs of our students. Our rich history is built on a foundation of academic rigor, strong community ties, and a commitment to nurturing well-rounded individuals.
             </p>
             <button onClick={() => navigate('/about')} className="mt-4 inline-block bg-blue-700 text-white px-5 py-2 rounded-full hover:bg-blue-800 transition-colors">MORE</button>
           </div>

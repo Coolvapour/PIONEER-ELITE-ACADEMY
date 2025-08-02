@@ -19,7 +19,7 @@ const AboutPage = () => {
       <div className="mb-8">
         <h3 className="text-2xl font-semibold text-blue-900 dark:text-blue-300 mb-3">School History</h3>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-          PIONEER ELITE ACADEMY is a private, ordinary, day and boarding school offering co-education for boys and girls. Founded in 2002, our school began with a vision to provide quality education in a rapidly growing community. Starting with a small group of dedicated teachers and a handful of students, we have grown steadily over the decades, expanding our facilities and curriculum to meet the evolving needs of our students. Our rich history is built on a foundation of academic rigor, strong community ties, and a commitment to nurturing well-rounded individuals.
+          PIONEER ELITE ACADEMY is a private, comprehensive, day and boarding school offering co-education for boys and girls. Founded in 2002, our school began with a vision to provide quality education in a rapidly growing community. Starting with a small group of dedicated teachers and a handful of students, we have grown steadily over the decades, expanding our facilities and curriculum to meet the evolving needs of our students. Our rich history is built on a foundation of academic rigor, strong community ties, and a commitment to nurturing well-rounded individuals.
         </p>
       </div>
 
@@ -55,18 +55,18 @@ const AboutPage = () => {
       </div>
 
       <div>
-        <h3 className="text-2xl font-semibold text-blue-900 dark:text-blue-300 mb-3">Message from Principal</h3>
+        <h3 className="text-2xl font-semibold text-blue-900 dark:text-blue-300 mb-3">Message from Head of institution</h3>
         <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
           <img
-            src="https://placehold.co/150x150/e0e0e0/333333?text=Principal"
+            src="https://placehold.co/150x150/e0e0e0/333333?text=Head of institution"
             alt="Principal"
             className="rounded-full shadow-md"
-            onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/150x150/e0e0e0/333333?text=Principal"; }}
+            onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/150x150/e0e0e0/333333?text=Head of Institution"; }}
           />
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex-1">
-            "Welcome to PIONEER ELITE ACADEMY! As Principal, I am incredibly proud of our dedicated staff, talented students, and supportive parent community. We strive to create an environment where every child feels valued, challenged, and inspired to reach their highest potential. Our commitment to academic excellence, character development, and a vibrant school life ensures that our students are well-prepared for future success. We look forward to partnering with you on your child's educational journey."
+            "Welcome to PIONEER ELITE ACADEMY! As Head of Institution, I am incredibly proud of our dedicated staff, talented students, and supportive parent community. We strive to create an environment where every child feels valued, challenged, and inspired to reach their highest potential. Our commitment to academic excellence, character development, and a vibrant school life ensures that our students are well-prepared for future success. We look forward to partnering with you on your child's educational journey."
             <br /><br />
-            <span className="font-semibold">- [Principal's Name], Principal</span>
+            <span className="font-semibold">- Head of Institution</span>
           </p>
         </div>
       </div>
