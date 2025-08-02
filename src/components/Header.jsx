@@ -12,7 +12,7 @@ import {
   X,
   Sun,
   Moon,
-  BookOpenCheck, // New icon for Online Library
+  Library,
 } from 'lucide-react';
 
 const Header = ({ isNavOpen, setIsNavOpen, toggleTheme, isDarkMode }) => {
@@ -26,8 +26,6 @@ const Header = ({ isNavOpen, setIsNavOpen, toggleTheme, isDarkMode }) => {
     { name: 'Chapel', icon: BookOpen, path: '/chapel' },
     { name: 'Photo Gallery', icon: Image, path: '/gallery' },
     { name: 'Contact', icon: Mail, path: '/contact' },
-    // New item for the external link
-    { name: 'Online Library', icon: BookOpenCheck, url: 'https://pioneerelite.snapplify.com/' },
   ];
 
   return (
@@ -36,136 +34,118 @@ const Header = ({ isNavOpen, setIsNavOpen, toggleTheme, isDarkMode }) => {
         {/* Logo and Brand */}
         <div className="flex items-center space-x-3">
           <img
-            src="https://digischool.co.ke/wp-content/uploads/2023/12/Pioneer-elite-Academy.jpg"
+            src="https://digital-stage.vercel.app/images/logo-placeholder.png"
             alt="Pioneer Elite Academy Logo"
-            className="h-12 w-12 rounded-full border-2 border-yellow-400 object-cover"
+            className="h-10 md:h-12 w-auto"
           />
-          <span className="text-xl font-bold tracking-tight hidden md:block">
-            Pioneer Elite Academy
-          </span>
+          <span className="text-xl md:text-2xl font-bold font-inter hidden sm:inline">PIONEER ELITE ACADEMY</span>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-6">
+        <nav className="hidden md:flex flex-grow justify-center space-x-8">
           {navItems.map((item) => (
-            // Conditional rendering for internal vs external links
-            item.path ? (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`flex items-center space-x-2 p-2 rounded-md transition-colors duration-200 ${
-                  location.pathname === item.path ? 'bg-blue-800 text-yellow-400' : 'hover:bg-blue-800'
-                }`}
-              >
-                <item.icon size={20} />
-                <span className="font-medium">{item.name}</span>
-              </Link>
-            ) : (
-              <a
-                key={item.name}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center space-x-2 p-2 rounded-md transition-colors duration-200 hover:bg-blue-800`}
-              >
-                <item.icon size={20} />
-                <span className="font-medium">{item.name}</span>
-              </a>
-            )
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex items-center space-x-2 py-2 px-3 rounded-md transition-colors duration-200 hover:bg-blue-800 ${
+                location.pathname === item.path ? 'bg-blue-800 font-semibold' : ''
+              }`}
+            >
+              <item.icon size={20} />
+              <span className="text-sm">{item.name}</span>
+            </Link>
           ))}
-          {/* Desktop Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            aria-label="Toggle Theme"
+          {/* External link for Online Library */}
+          <a
+            href="https://my.snapplify.com/store/all/books"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 py-2 px-3 rounded-md transition-colors duration-200 hover:bg-yellow-600 bg-yellow-500 text-blue-950"
           >
-            {isDarkMode ? (
-              <Sun size={24} className="text-yellow-400" />
-            ) : (
-              <Moon size={24} className="text-white" />
-            )}
-          </button>
+            <Library size={20} />
+            <span className="text-sm font-semibold">Online Library</span>
+          </a>
         </nav>
 
-        {/* Mobile menu button and theme toggle */}
-        <div className="flex items-center space-x-4 lg:hidden">
+        {/* Desktop Theme Toggle & Mobile Menu Button */}
+        <div className="flex items-center space-x-4">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 hidden md:block"
             aria-label="Toggle Theme"
           >
             {isDarkMode ? (
               <Sun size={24} className="text-yellow-400" />
             ) : (
-              <Moon size={24} className="text-white" />
+              <Moon size={24} className="text-blue-200" />
             )}
           </button>
           <button
             onClick={() => setIsNavOpen(true)}
-            className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 md:hidden"
             aria-label="Open Navigation"
           >
             <Menu size={28} />
           </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation (Slide-in) */}
-        <div
-          className={`fixed inset-y-0 right-0 z-50 bg-blue-950 w-64 transform transition-transform duration-300 ease-in-out ${
-            isNavOpen ? 'translate-x-0' : 'translate-x-full'
-          } lg:hidden flex flex-col shadow-lg`}
-        >
-          <div className="flex justify-between items-center p-4 border-b border-blue-800">
-            <span className="text-xl font-bold">Navigation</span>
-            <button
-              onClick={() => setIsNavOpen(false)}
-              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              aria-label="Close Navigation"
+      {/* Mobile Side Navigation */}
+      <div
+        className={`fixed top-0 right-0 h-full w-64 bg-blue-900 shadow-lg transform transition-transform duration-300 z-[60] ${
+          isNavOpen ? 'translate-x-0' : 'translate-x-full'
+        } md:hidden`}
+      >
+        <div className="flex justify-between items-center p-4 border-b border-blue-700">
+          <h3 className="text-xl font-bold">Menu</h3>
+          <button
+            onClick={() => setIsNavOpen(false)}
+            className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            aria-label="Close Navigation"
+          >
+            <X size={28} />
+          </button>
+        </div>
+        <div className="flex flex-col items-start space-y-2 p-4">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={() => setIsNavOpen(false)} // Close menu on nav
+              className={`flex items-center space-x-3 w-full py-3 px-4 rounded-md transition-colors duration-200 hover:bg-blue-800 ${
+                location.pathname === item.path ? 'bg-blue-800' : ''
+              }`}
             >
-              <X size={28} />
-            </button>
-          </div>
-          <div className="flex flex-col items-center space-y-2 p-4">
-            {navItems.map((item) => (
-              item.path ? (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  onClick={() => setIsNavOpen(false)}
-                  className={`flex items-center space-x-3 w-full justify-center py-3 px-4 rounded-md transition-colors duration-200 hover:bg-blue-800 ${
-                    location.pathname === item.path ? 'bg-blue-800' : ''
-                  }`}
-                >
-                  <item.icon size={22} />
-                  <span className="text-lg font-medium">{item.name}</span>
-                </Link>
-              ) : (
-                <a
-                  key={item.name}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsNavOpen(false)}
-                  className={`flex items-center space-x-3 w-full justify-center py-3 px-4 rounded-md transition-colors duration-200 hover:bg-blue-800`}
-                >
-                  <item.icon size={22} />
-                  <span className="text-lg font-medium">{item.name}</span>
-                </a>
-              )
-            ))}
-            {/* Theme toggle also in mobile side nav */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"
-              aria-label="Toggle Theme"
-            >
-              {isDarkMode ? (
-                <Sun size={24} className="text-yellow-400" />
-              ) : (
-                <Moon size={24} className="text-white" />
-              )}
-            </button>
-          </div>
+              <item.icon size={22} />
+              <span className="text-lg font-medium">{item.name}</span>
+            </Link>
+          ))}
+          {/* External link for Online Library in mobile menu */}
+          <a
+            href="https://my.snapplify.com/store/all/books"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsNavOpen(false)}
+            className="flex items-center space-x-3 w-full py-3 px-4 rounded-md transition-colors duration-200 hover:bg-yellow-600 bg-yellow-500 text-blue-950"
+          >
+            <Library size={22} />
+            <span className="text-lg font-medium">Online Library</span>
+          </a>
+          {/* Theme toggle in mobile side nav */}
+          <button
+            onClick={toggleTheme}
+            className="flex items-center space-x-3 w-full py-3 px-4 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"
+            aria-label="Toggle Theme"
+          >
+            {isDarkMode ? (
+              <Sun size={24} className="text-yellow-400" />
+            ) : (
+              <Moon size={24} className="text-blue-200" />
+            )}
+            <span className="text-lg font-medium">
+              {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+            </span>
+          </button>
         </div>
       </div>
     </header>
