@@ -126,7 +126,7 @@ const TheSchoolPage = () => {
             </div>
             <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm text-center">
               <img src="https://placehold.co/80x80/ffd700/000000?text=Student" alt="Top Student" className="rounded-full mx-auto mb-2" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/ffd700/000000?text=Student"; }} />
-              <p className="font-semibold text-gray-800 dark:text-gray-200">Joy Jruto</p>
+              <p className="font-semibold text-gray-800 dark:text-gray-200">Joy Jeruto</p>
               <p className="text-sm text-gray-600 dark:text-gray-400">Best in Math, Junior Secondary (Grade 9)</p>
             </div>
           </div>
