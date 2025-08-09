@@ -96,7 +96,7 @@ const HomePage = () => { // Removed handleNavClick prop
         <div className="flex items-center space-x-4 mb-2 sm:mb-0">
           <span className="flex items-center"><Mail size={16} className="mr-1" /> info@pioneerelite.edu</span>
           <span className="flex items-center"><Phone size={16} className="mr-1" /> 0722496897</span>
-          <span className="flex items-center"><Phone size={16} className="mr-1" /> 0705926417</span>
+          <span className="flex items-center"><Phone size={16} className="mr-1" /> 0722286280</span>
         </div>
         <div className="flex space-x-3">
           <a href="https://facebook.com/pioneereliteacademy" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors"><Facebook size={20} /></a>
