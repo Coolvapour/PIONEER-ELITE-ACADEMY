@@ -58,7 +58,7 @@ const ManagementPage = () => {
       {/* Director Section */}
       <div className="bg-blue-100 dark:bg-blue-900 p-6 rounded-lg shadow-md mb-8 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
         <img
-          src={director.img}
+          src={"/images/director.jpg"}
           alt={director.name}
           className="rounded-full h-32 w-32 object-cover border-2 border-yellow-600 dark:border-yellow-300 flex-shrink-0"
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/150x150/e0e0e0/333333?text=Director"; }}
